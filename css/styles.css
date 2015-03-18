@@ -1,0 +1,356 @@
+/*******************************************
+ *****    CS:GO MAP BAN INTERFACE     ******
+ -------------------------------------------
+ *written by Thane Woidan - thanewoidan.com*
+ ******************************************/
+
+/* Mini/modified version of Eric Meyer's reset -- meyerweb.com */
+html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,article,aside,big,cite,code,del,details,dfn,em,figcaption,figure,footer,header,hgroup,img,ins,kbd,nav,q,samp,section,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline;}:focus{outline: 0;}img{-ms-interpolation-mode: bicubic;}body{line-height: 1;}table{border-spacing: 0;}caption,th,td{text-align: left; font-weight: normal;}blockquote:before,blockquote:after,q:before,q:after{content: "";}blockquote,q{quotes: "" "";}
+
+/**************
+    BASICS
+**************/
+html,
+body {
+    width: 100%;
+    
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* BASE FONT SIZE */
+body {
+    background: none #333;
+    font-size: 14px;
+}
+
+/* BASE FONT FAMILY and COLOR -- FORM ELEMENTS CAN HAVE INHERITANCE ISSUES */
+body, button, input, select, textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
+}
+
+/* DEFAULT MARGIN FOR BLOCK LEVEL CONTENT ELEMENTS */
+address, blockquote, code, figure, dl, ol, ul, p, pre, table {
+    margin: 0 0 1em;
+    line-height: 1.35em;
+}
+
+/* DISPLAY BLOCK OF HTML5 ELEMENTS */
+article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
+    display: block;
+}
+
+* { box-sizing: border-box; }
+
+.muted { color: #CCC; }
+.accent { color: #EF4C37; }
+
+/**************
+    COLUMNS
+**************/
+
+/* wrapping columns with .cols will clearfix */
+.cols:after {
+    content: " ";
+    display: table;
+}
+
+.cols:after {
+    clear: both;
+}
+
+/* intervals of 5% at a time, as well as 33% classes for thirds */
+.col-5,.col-10,.col-15,.col-20,.col-25,.col-30,.col-33,.col-35,.col-40,.col-45,
+.col-50,.col-55,.col-60,.col-65,.col-70,.col-75,.col-80,.col-85,.col-90,.col-95 {
+    margin: 0 2% 2% 0;
+    float: left;
+    display: inline;
+    min-height: 1px;
+}
+
+.col-5  { width: 3.1%;  }
+.col-10 { width: 8.2%;  }
+.col-15 { width: 13.3%; }
+.col-20 { width: 18.4%; }
+.col-25 { width: 23.5%; }
+.col-30 { width: 28.6%; }
+.col-35 { width: 33.7%; }
+.col-40 { width: 38.8%; }
+.col-45 { width: 43.9%; }
+.col-50 { width: 49%;   }
+.col-55 { width: 54.1%; }
+.col-60 { width: 59.2%; }
+.col-65 { width: 64.3%; }
+.col-70 { width: 69.4%; }
+.col-75 { width: 74.5%; }
+.col-80 { width: 79.6%; }
+.col-85 { width: 84.7%; }
+.col-90 { width: 89.8%; }
+.col-95 { width: 94.9%; }
+
+/* thirds, for use only with 3 of each other! */
+.col-33 { width: 32%; }
+
+/* last column in row needs this class */
+.col-last {
+    margin-right: 0;
+    display: inline-block;
+    float:none;
+    position: relative;
+    *display:block;
+    *width: auto;
+}
+
+.ie-lt7 .col-last {
+
+}
+
+
+/*****************
+    MEDIA BOXES
+******************/
+.mb {
+    margin:1.75em 0;
+}
+.mb .img,.mb .bdy {
+}
+.mb .img {
+    float:left;
+    margin-right:1.35em;
+}
+.mb .img img,.mb .img .img {
+    display:block;
+}
+.mb .bdy {
+}
+.mb .bdy *:first-child {
+    margin-top: 0;
+}
+
+/* to support IE6 and under, you need .mb as a wrapper and a direct child div with to apply the helper classes */
+/* IMAGE ON RIGHT */
+.mb-ir .img {
+    float:right;
+    margin-right:0;
+    margin-left: 1.35em;
+}
+/* IMAGE AND TEXT BLOCKED -- ABOVE/BELOW EACH OTHER */
+.mb-ib .img,.mb-ib .img img,.mb-ib .img .img,.mb-ib .bdy {
+    float:none !important;
+    display:block;
+    margin:0 auto;
+    text-align:center;
+}
+.mb-ib .bdy *:first-child {
+    margin-top: 1em;
+}
+
+
+
+/**************
+    BUTTONS
+**************/
+
+.btn {
+    /* layout */
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    padding: 4px 10px;
+    vertical-align: middle;
+
+    /* text */
+    color: #444;
+    line-height: 125%;
+    text-decoration: none;
+    cursor: pointer;
+
+    /* borders */
+    border: 1px solid #CCC;
+    border-color: rgba(0,0,0,.2) rgba(0,0,0,.2) rgba(0,0,0,.4);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box;
+
+    /* shadows -- a highlight on top and slight shadow on bottom */
+    -webkit-box-shadow: 0 1px 1px rgba(255,255,255,.25) inset, 0 -1px 0 rgba(0,0,0,.1) inset;
+    -moz-box-shadow: 0 1px 1px rgba(255,255,255,.25) inset, 0 -1px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 1px 1px rgba(255,255,255,.25) inset, 0 -1px 0 rgba(0,0,0,.1) inset;
+    text-shadow: 0 1px 1px rgba(0,0,0,.15);
+
+    /* backgrounds */
+    background-color: #F9F9F9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#F9F9F9), to(#E6E6E6)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #F9F9F9, #E6E6E6); /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image:    -moz-linear-gradient(top, #F9F9F9, #E6E6E6); /* FF3.6+ */
+    background-image:     -ms-linear-gradient(top, #F9F9F9, #E6E6E6); /* IE10 */
+    background-image:      -o-linear-gradient(top, #F9F9F9, #E6E6E6); /* Opera 11.10+ */
+    background-image:         linear-gradient(to bottom, #F9F9F9, #E6E6E6);
+}
+
+.btn:active,.btn:focus { outline: 0; text-decoration: none; }
+
+.btn:hover {
+    background: none #ECECEC;
+    text-decoration: none;
+    color: #000;
+}
+
+.btn:active {
+    text-shadow: 0 1px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1) inset, 0 -1px 0 rgba(255,255,255,.25) inset;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1) inset, 0 -1px 0 rgba(255,255,255,.25) inset;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1) inset, 0 -1px 0 rgba(255,255,255,.25) inset;
+
+    background-color: #F9F9F9;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#E6E6E6), to(#F9F9F9)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #E6E6E6, #F9F9F9); /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image:    -moz-linear-gradient(top, #E6E6E6, #F9F9F9); /* FF3.6+ */
+    background-image:     -ms-linear-gradient(top, #E6E6E6, #F9F9F9); /* IE10 */
+    background-image:      -o-linear-gradient(top, #E6E6E6, #F9F9F9); /* Opera 11.10+ */
+    background-image:         linear-gradient(to bottom, #E6E6E6, #F9F9F9);
+}
+
+.btn-large { font-size: 1.25em; padding: 6px 14px; }
+.btn-small { font-size: .85em;  padding: 3px 6px; }
+.btn-tiny  { font-size: .75em;  padding: 2px 4px; }
+
+/**************
+    CONTAINERS
+**************/
+
+/* spaces content during resizing */
+.page { padding: 0 20px; }
+
+.main {
+    width: 1260px;
+    margin: 0 auto;
+}
+
+header h1 {
+    margin: 0;
+    color: #b3dcf1;
+    font-size: 50px;
+}
+
+.content {
+    padding: 15px;
+}
+
+/**************
+    SITE CONTENT
+**************/
+.team-header {
+    -webkit-appearance: none;
+    font-size: 24px;
+    background: none transparent;
+    border: 0;
+    margin-bottom: 10px;
+}
+
+.bans-list {
+    list-style: inside disc;
+}
+
+.bans-list > * {
+    margin-bottom: 5px;
+}
+
+.map-list {
+    font-size: 36px;
+    list-style: outside none;
+}
+
+.map {
+    width: calc(50% - 10px);
+    height: 125px;
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 2px solid rgba(255, 255, 255, .5);
+    cursor: pointer;
+    float: left;
+    text-shadow:
+        1px 1px 8px rgba(0, 0, 0, .9),
+        1px 1px 8px rgba(0, 0, 0, .9);
+    line-height: 1;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .75);
+}
+
+.map:nth-child(2n) {
+    margin-left: 20px;
+}
+
+.map .graphic {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-size: 100% auto;
+    background-position: 10% 50%;
+    top: 0;
+    left: 0;
+    -webkit-filter: brightness(80%);
+    -webkit-transition: all 150ms ease;
+}
+
+.map:hover {
+    border-color: rgba(255, 255, 255, .75);
+}
+
+.map:hover .graphic {
+    -webkit-filter: brightness(100%);
+}
+
+.map.banned .graphic {
+    -webkit-filter: brightness(20%);
+}
+
+.map.banned .map-label {
+    color: #333;
+}
+
+@-webkit-keyframes pulseSelected {
+    from { box-shadow: 0 0 25px rgba(255, 50, 0, .98); }
+    to   { box-shadow: 0 0 25px rgba(255, 50, 0, .5); }
+}
+
+.map.picked {
+    border-color: #FFCC00;
+    -webkit-animation: pulseSelected 500ms infinite alternate;
+}
+
+.map-label {
+    position: relative;
+}
+
+.map-nuke .graphic     { background-image: url(../img/cache.jpg); }
+.map-overpass .graphic { background-image: url(../img/overpass.jpg); }
+.map-mirage .graphic   { background-image: url(../img/mirage.png); }
+.map-cache .graphic    { background-image: url(../img/cache.jpg); }
+.map-dust2 .graphic    { background-image: url(../img/dust2.png); }
+.map-season .graphic   { background-image: url(../img/season.jpg); }
+.map-inferno .graphic  { background-image: url(../img/inferno.jpg); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
