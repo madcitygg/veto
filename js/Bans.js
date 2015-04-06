@@ -63,7 +63,7 @@ var BansViewModel = function () {
             }
         }
 
-        // WAS IT THE LAST MAP BAN -- MAP CHOSEN?
+        // WAS IT THE LAST MAP BAN, MAKING THE MAP CHOSEN?
         if (unbannedMapIds.length === 1) {
             lastMap = findMapById(unbannedMapIds[0]);
             lastMap.isPicked(true);
@@ -71,15 +71,34 @@ var BansViewModel = function () {
     };
 
     var toggleBan = function (mapData) {
-        if (mapData.isBanned() === true) {
+
+        if (mapData.isBanned() === true && isTeamOnesTurn() === true) {
+
+            // was UNBANNED and team 1's turn
             bansTeamOne.remove(mapData);
             bansTeamTwo.remove(mapData);
             mapData.isBanned(false);
+            isTeamOnesTurn(false);
+
+
+        } else if (mapData.isBanned() === true && isTeamOnesTurn() === false) {
+
+            // was UNBANNED and team 2's turn
+            bansTeamOne.remove(mapData);
+            bansTeamTwo.remove(mapData);
+            mapData.isBanned(false);
+            isTeamOnesTurn(true);
+
         } else if (mapData.isBanned() === false && isTeamOnesTurn() === true) {
+
+            // was BANNED and team 1's turn
             mapData.isBanned(true);
             bansTeamOne.push(mapData);
             isTeamOnesTurn(false);
+
         } else {
+
+            // was BANNED and team 2's turn
             mapData.isBanned(true);
             bansTeamTwo.push(mapData)
             isTeamOnesTurn(true);
