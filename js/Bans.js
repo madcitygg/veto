@@ -53,7 +53,7 @@ var BansViewModel = function () {
     }
 
     var markPickedMap = function () {
-        var i = maps().length;
+        var i = j = maps().length;
         var unbannedMapIds = [];
         var lastMap = null;
 
@@ -63,10 +63,19 @@ var BansViewModel = function () {
             }
         }
 
-        // WAS IT THE LAST MAP BAN, MAKING THE MAP CHOSEN?
         if (unbannedMapIds.length === 1) {
+
+            // was the last ban, which picks the map
             lastMap = findMapById(unbannedMapIds[0]);
             lastMap.isPicked(true);
+
+        } else {
+
+            // was a regular ban, clear any picks
+            while (j--) {
+                console.log('j', j);
+                maps()[j].isPicked(false);
+            }
         }
     };
 
