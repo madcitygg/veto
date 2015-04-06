@@ -334,8 +334,14 @@ header h1 {
 .map-season .graphic   { background-image: url(../img/season.jpg); }
 .map-inferno .graphic  { background-image: url(../img/inferno.jpg); }
 
+.callout {
+    margin: 20px 0 0;
+    text-align: center;
+}
 
-
+.btn-bo3 {
+    /*margin: 0 auto;*/
+}
 
 
 

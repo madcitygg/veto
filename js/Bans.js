@@ -2,6 +2,25 @@
 // MODEL FOR BANS
 // MODEL FOR BANS
 var BansModel = function () {
+    var isBo3Mode = ko.observable(false);
+    var bo3StepModel = function (id, isPick, isBan) {
+        return {
+            id: id,
+            isPickStep: isPick,
+            isBanStep: isBan
+        }
+    }
+
+    var bo3Steps = [
+        bo3StepModel(0, true, false),
+        bo3StepModel(1, true, false),
+        bo3StepModel(2, false, true),
+        bo3StepModel(3, false, true),
+        bo3StepModel(4, false, true),
+        bo3StepModel(5, false, true),
+        bo3StepModel(6, false, true)
+    ];
+
     var map = function (ident, displayName) {
         return {
             id: ident,
@@ -23,8 +42,10 @@ var BansModel = function () {
     ]);
 
     return {
+        isBo3Mode: isBo3Mode,
+        bo3Steps: bo3Steps,
         maps: maps
-    }
+    };
 };
 
 var TheBansModel = BansModel();
@@ -117,6 +138,7 @@ var BansViewModel = function () {
     };
 
     return {
+        isBo3Mode: TheBansModel.isBo3Mode,
         maps: maps,
         toggleBan: toggleBan,
         pickedMap: pickedMap,
