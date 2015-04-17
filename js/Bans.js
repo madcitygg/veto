@@ -9,7 +9,7 @@ var BansModel = function () {
             isPickStep: isPick,
             isBanStep: isBan
         }
-    }
+    };
 
     var bo3Steps = [
         bo3StepModel(0, true, false),
@@ -20,6 +20,8 @@ var BansModel = function () {
         bo3StepModel(5, false, true),
         bo3StepModel(6, false, true)
     ];
+
+    var currentBo3Step = ko.observable(bo3Steps[0]);
 
     var map = function (ident, displayName) {
         return {
@@ -44,6 +46,7 @@ var BansModel = function () {
     return {
         isBo3Mode: isBo3Mode,
         bo3Steps: bo3Steps,
+        currentBo3Step: currentBo3Step,
         maps: maps
     };
 };
@@ -58,6 +61,10 @@ var TheBansModel = BansModel();
 var BansViewModel = function () {
     var maps = TheBansModel.maps;
 
+    var isBo3Mode = TheBansModel.isBo3Mode;
+    var bo3Steps = TheBansModel.bo3Steps;
+    var currentBo3Step = TheBansModel.currentBo3Step;
+
     var pickedMap = ko.observable('');
     var isTeamOnesTurn = ko.observable(true);
     var bansTeamOne = ko.observableArray([]);
@@ -67,7 +74,6 @@ var BansViewModel = function () {
         var i = maps().length;
         while (i--) {
             if (maps()[i].id === id) {
-                console.log('found map of', maps()[i]);
                 return maps()[i];
             }
         }
@@ -94,7 +100,6 @@ var BansViewModel = function () {
 
             // was a regular ban, clear any picks
             while (j--) {
-                console.log('j', j);
                 maps()[j].isPicked(false);
             }
         }
@@ -102,36 +107,45 @@ var BansViewModel = function () {
 
     var toggleBan = function (mapData) {
 
-        if (mapData.isBanned() === true && isTeamOnesTurn() === true) {
-
-            // was UNBANNED and team 1's turn
-            bansTeamOne.remove(mapData);
-            bansTeamTwo.remove(mapData);
-            mapData.isBanned(false);
-            isTeamOnesTurn(false);
-
-
-        } else if (mapData.isBanned() === true && isTeamOnesTurn() === false) {
-
-            // was UNBANNED and team 2's turn
-            bansTeamOne.remove(mapData);
-            bansTeamTwo.remove(mapData);
-            mapData.isBanned(false);
-            isTeamOnesTurn(true);
-
-        } else if (mapData.isBanned() === false && isTeamOnesTurn() === true) {
-
-            // was BANNED and team 1's turn
-            mapData.isBanned(true);
-            bansTeamOne.push(mapData);
-            isTeamOnesTurn(false);
+        if (isBo3Mode()) {
+            // BANS and PICKS for Bo3
+            if (currentBo3Step.isPickStep && isTeamOnesTurn()) {
+                console.log('team 1 pick');
+            }
 
         } else {
+            // REGULAR BANS for Bo1
+            if (mapData.isBanned() && isTeamOnesTurn()) {
 
-            // was BANNED and team 2's turn
-            mapData.isBanned(true);
-            bansTeamTwo.push(mapData)
-            isTeamOnesTurn(true);
+                // was UNBANNED and team 1's turn
+                bansTeamOne.remove(mapData);
+                bansTeamTwo.remove(mapData);
+                mapData.isBanned(false);
+                isTeamOnesTurn(false);
+
+
+            } else if (mapData.isBanned() && isTeamOnesTurn() === false) {
+
+                // was UNBANNED and team 2's turn
+                bansTeamOne.remove(mapData);
+                bansTeamTwo.remove(mapData);
+                mapData.isBanned(false);
+                isTeamOnesTurn(true);
+
+            } else if (mapData.isBanned() === false && isTeamOnesTurn()) {
+
+                // was BANNED and team 1's turn
+                mapData.isBanned(true);
+                bansTeamOne.push(mapData);
+                isTeamOnesTurn(false);
+
+            } else {
+
+                // was BANNED and team 2's turn
+                mapData.isBanned(true);
+                bansTeamTwo.push(mapData)
+                isTeamOnesTurn(true);
+            }
         }
 
         markPickedMap();
