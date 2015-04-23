@@ -106,12 +106,30 @@ var BansViewModel = function () {
     };
 
     var toggleBan = function (mapData) {
-
         if (isBo3Mode()) {
             // BANS and PICKS for Bo3
-            if (currentBo3Step.isPickStep && isTeamOnesTurn()) {
+
+            var currentStepIndex = bo3Steps.indexOf(currentBo3Step());            
+
+            if (currentBo3Step().isPickStep && isTeamOnesTurn()) {
                 console.log('team 1 pick');
+                mapData.isPicked(true);
+                isTeamOnesTurn(false);
+            } else if (currentBo3Step().isBanStep && isTeamOnesTurn()) {
+                console.log('team 1 ban');
+                mapData.isBanned(true);
+                isTeamOnesTurn(false);
+            } else if (currentBo3Step().isPickStep && isTeamOnesTurn() === false) {
+                console.log('team 2 pick');
+                mapData.isPicked(true);
+                isTeamOnesTurn(true);
+            } else if (currentBo3Step().isBanStep && isTeamOnesTurn() === false) {
+                console.log('team 2 ban');
+                mapData.isBanned(true);
+                isTeamOnesTurn(true);
             }
+
+            currentBo3Step(bo3Steps[currentStepIndex + 1])
 
         } else {
             // REGULAR BANS for Bo1
@@ -146,9 +164,9 @@ var BansViewModel = function () {
                 bansTeamTwo.push(mapData)
                 isTeamOnesTurn(true);
             }
-        }
 
-        markPickedMap();
+            markPickedMap();
+        }
     };
 
     return {
