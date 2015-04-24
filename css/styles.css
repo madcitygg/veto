@@ -257,6 +257,12 @@ header h1 {
 
 .bans-list > * {
     margin-bottom: 5px;
+    text-decoration: line-through;
+}
+
+.bans-list .pick {
+    color: #BADA55;
+    text-decoration: none;
 }
 
 .map-list {
@@ -326,7 +332,7 @@ header h1 {
     position: relative;
 }
 
-.map-nuke .graphic     { background-image: url(../img/cache.jpg); }
+.map-nuke .graphic     { background-image: url(../img/nuke.png); }
 .map-overpass .graphic { background-image: url(../img/overpass.jpg); }
 .map-mirage .graphic   { background-image: url(../img/mirage.png); }
 .map-cache .graphic    { background-image: url(../img/cache.jpg); }

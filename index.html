@@ -31,7 +31,7 @@
                         <input class="team-header" type="text" placeholder="Team 1" />
 
                         <ul class="bans-list" data-bind="foreach: bansTeamOne">
-                            <li class="ban" data-bind="text: name">
+                            <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
                                 Mapname
                             </li>
                         </ul>
@@ -52,7 +52,7 @@
                         <input class="team-header" type="text" placeholder="Team 2" />
 
                         <ul class="bans-list" data-bind="foreach: bansTeamTwo">
-                            <li class="ban" data-bind="text: name">
+                            <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
                                 Mapname
                             </li>
                         </ul>

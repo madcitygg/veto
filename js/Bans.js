@@ -79,7 +79,7 @@ var BansViewModel = function () {
         }
     }
 
-    var markPickedMap = function () {
+    var markLastPickedMap = function () {
         var i = j = maps().length;
         var unbannedMapIds = [];
         var lastMap = null;
@@ -90,14 +90,22 @@ var BansViewModel = function () {
             }
         }
 
-        if (unbannedMapIds.length === 1) {
+        if (isBo3Mode() && unbannedMapIds.length === 3) {
+            // picking for Bo3
+            var k = unbannedMapIds.length;
+            while (k--) {
+                if (findMapById(unbannedMapIds[k]).isPicked() === false) {
+                    lastMap = findMapById(unbannedMapIds[k]);
+                }
+            }
 
-            // was the last ban, which picks the map
-            lastMap = findMapById(unbannedMapIds[0]);
             lastMap.isPicked(true);
 
-        } else {
-
+        } else if (isBo3Mode() === false && unbannedMapIds.length === 1) {
+            // picking for non-Bo3
+            lastMap = findMapById(unbannedMapIds[0]);
+            lastMap.isPicked(true);
+        } else if (isBo3Mode() === false) {
             // was a regular ban, clear any picks
             while (j--) {
                 maps()[j].isPicked(false);
@@ -109,24 +117,24 @@ var BansViewModel = function () {
         if (isBo3Mode()) {
             // BANS and PICKS for Bo3
 
-            var currentStepIndex = bo3Steps.indexOf(currentBo3Step());            
+            var currentStepIndex = bo3Steps.indexOf(currentBo3Step());
 
             if (currentBo3Step().isPickStep && isTeamOnesTurn()) {
-                console.log('team 1 pick');
                 mapData.isPicked(true);
                 isTeamOnesTurn(false);
+                bansTeamOne.push(mapData);
             } else if (currentBo3Step().isBanStep && isTeamOnesTurn()) {
-                console.log('team 1 ban');
                 mapData.isBanned(true);
                 isTeamOnesTurn(false);
+                bansTeamOne.push(mapData);
             } else if (currentBo3Step().isPickStep && isTeamOnesTurn() === false) {
-                console.log('team 2 pick');
                 mapData.isPicked(true);
                 isTeamOnesTurn(true);
+                bansTeamTwo.push(mapData);
             } else if (currentBo3Step().isBanStep && isTeamOnesTurn() === false) {
-                console.log('team 2 ban');
                 mapData.isBanned(true);
                 isTeamOnesTurn(true);
+                bansTeamTwo.push(mapData);
             }
 
             currentBo3Step(bo3Steps[currentStepIndex + 1])
@@ -164,9 +172,10 @@ var BansViewModel = function () {
                 bansTeamTwo.push(mapData)
                 isTeamOnesTurn(true);
             }
-
-            markPickedMap();
         }
+
+        // mark the map that was picked
+        markLastPickedMap();
     };
 
     return {
