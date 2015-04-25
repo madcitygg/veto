@@ -183,18 +183,18 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 
     /* backgrounds */
     background-color: #F9F9F9;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#F9F9F9), to(#E6E6E6)); /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient(top, #F9F9F9, #E6E6E6); /* Chrome 10+, Saf5.1+, iOS 5+ */
-    background-image:    -moz-linear-gradient(top, #F9F9F9, #E6E6E6); /* FF3.6+ */
-    background-image:     -ms-linear-gradient(top, #F9F9F9, #E6E6E6); /* IE10 */
-    background-image:      -o-linear-gradient(top, #F9F9F9, #E6E6E6); /* Opera 11.10+ */
-    background-image:         linear-gradient(to bottom, #F9F9F9, #E6E6E6);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, .15)), to(rgba(0, 0, 0, .1))); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .1)); /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image:    -moz-linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .1)); /* FF3.6+ */
+    background-image:     -ms-linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .1)); /* IE10 */
+    background-image:      -o-linear-gradient(top, rgba(255, 255, 255, .15), rgba(0, 0, 0, .1)); /* Opera 11.10+ */
+    background-image:         linear-gradient(to bottom, rgba(255, 255, 255, .15), rgba(0, 0, 0, .1));
 }
 
 .btn:active,.btn:focus { outline: 0; text-decoration: none; }
 
 .btn:hover {
-    background: none #ECECEC;
+    background-image: none;
     text-decoration: none;
     color: #000;
 }
@@ -234,6 +234,12 @@ header h1 {
     margin: 0;
     color: #b3dcf1;
     font-size: 50px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+header:hover .btn-bo3 {
+    opacity: 1;
 }
 
 .content {
@@ -248,11 +254,15 @@ header h1 {
     font-size: 24px;
     background: none transparent;
     border: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .bans-list {
     list-style: inside disc;
+    background: rgba(255, 255, 255, .05);
+    min-height: 100px;
+    padding: 8px 10px;
+    border-radius: 2px;
 }
 
 .bans-list > * {
@@ -341,12 +351,19 @@ header h1 {
 .map-inferno .graphic  { background-image: url(../img/inferno.jpg); }
 
 .callout {
-    margin: 20px 0 0;
+    margin: 10px 0 0;
     text-align: center;
 }
 
 .btn-bo3 {
-    /*margin: 0 auto;*/
+    opacity: .1;
+    vertical-align: middle;
+    margin-left: 30px;
+}
+
+.btn-bo3-enabled {
+    opacity: 1;
+    background-color: #BADA55;
 }
 
 
