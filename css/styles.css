@@ -37,6 +37,10 @@ address, blockquote, code, figure, dl, ol, ul, p, pre, table {
     line-height: 1.35em;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5em;
+}
+
 /* DISPLAY BLOCK OF HTML5 ELEMENTS */
 article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
     display: block;
@@ -46,6 +50,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 
 .muted { color: #CCC; }
 .accent { color: #EF4C37; }
+
+.nobull { list-style: outside none; }
 
 /**************
     COLUMNS
@@ -230,6 +236,10 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
     margin: 0 auto;
 }
 
+header {
+    position: relative;
+}
+
 header h1 {
     margin: 0;
     color: #b3dcf1;
@@ -245,6 +255,42 @@ header:hover .btn-bo3 {
 
 .content {
     padding: 15px;
+}
+
+/**************
+    PREFERENCES
+**************/
+.prefs {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    width: 300px;
+    z-index: 5;
+    text-align: right;
+}
+
+.prefs .prefs-pane {
+    display: none;
+    text-align: left;
+}
+
+.prefs:hover .prefs-pane {
+    display: block;
+    background: none rgba(0, 0, 0, .5);
+}
+
+.icon {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    background-repeat: no-repeat;
+}
+
+.icon-cog {
+    background: transparent url(../img/cog.png) 0 0 no-repeat;
+    background-size: 32px 32px;
+    -webkit-filter: invert(80%);
+    filter: invert(80%);
 }
 
 /**************
@@ -359,7 +405,7 @@ header:hover .btn-bo3 {
 .btn-bo3 {
     opacity: .1;
     vertical-align: middle;
-    margin-left: 30px;
+    width: 100%;
 }
 
 .btn-bo3-enabled {

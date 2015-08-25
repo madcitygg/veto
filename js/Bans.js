@@ -23,10 +23,11 @@ var BansModel = function () {
 
     var currentBo3Step = ko.observable(bo3Steps[0]);
 
-    var map = function (ident, displayName) {
+    var map = function (ident, displayName, active) {
         return {
             id: ident,
             name: displayName,
+            active: ko.observable(active),
             isBanned: ko.observable(false),
             isPicked: ko.observable(false),
             bannedByTeamOne: ko.observable(false)
@@ -34,13 +35,15 @@ var BansModel = function () {
     };
 
     var maps = ko.observableArray([
-        map('nuke', 'Nuke'),
-        map('overpass', 'Overpass'),
-        map('mirage', 'Mirage'),
-        map('cache', 'Cache'),
-        map('dust2', 'Dust 2'),
-        map('season', 'Season'),
-        map('inferno', 'Inferno')
+        map('nuke', 'Nuke', false),
+        map('overpass', 'Overpass', true),
+        map('mirage', 'Mirage', true),
+        map('cache', 'Cache', true),
+        map('dust2', 'Dust 2', true),
+        map('season', 'Season', false),
+        map('inferno', 'Inferno', true),
+        map('train', 'Train', true),
+        map('cbble', 'Cobblestone', true)
     ]);
 
     return {
