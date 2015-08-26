@@ -1,3 +1,28 @@
+// STORAGE FOR CHOSEN PREFS
+// STORAGE FOR CHOSEN PREFS
+// STORAGE FOR CHOSEN PREFS
+var Storage = {
+    NAME_KEY:  'csgochi-veto-name',
+    MAPS_KEY: 'csgochi-veto-mappool',
+
+    storeName: function (name) {
+        localStorage.setItem(this.MAPS_KEY, ko.toJSON(name));
+    },
+
+    recallName: function () {
+        return JSON.parse(localStorage.getItem(this.NAME_KEY));
+    },
+
+    storeMaps: function (maps) {
+        localStorage.setItem(this.MAPS_KEY, ko.toJSON(maps));
+    },
+
+    recallMaps: function () {
+        return JSON.parse(localStorage.getItem(MAPS_KEY));
+    }
+}
+
+
 // MODEL FOR BANS
 // MODEL FOR BANS
 // MODEL FOR BANS
@@ -73,6 +98,14 @@ var BansViewModel = function () {
     var bansTeamOne = ko.observableArray([]);
     var bansTeamTwo = ko.observableArray([]);
 
+
+    // recall and fill in saved name
+    var customTitle = 'CS:GO CHICAGO';
+    var recalledTitle = Storage.recallName();
+    if (recalledTitle) {
+        customTitle = ko.observable(recalledTitle);
+    }
+
     var findMapById = function (id) {
         var i = maps().length;
         while (i--) {
@@ -88,7 +121,7 @@ var BansViewModel = function () {
         var lastMap = null;
 
         while (i--) {
-            if (maps()[i].isBanned() === false) {
+            if (maps()[i].isBanned() === false && maps()[i].active()) {
                 unbannedMapIds.push(maps()[i].id);
             }
         }
@@ -179,16 +212,23 @@ var BansViewModel = function () {
 
         // mark the map that was picked
         markLastPickedMap();
+
+        maps.subscribe(function (u, wot) {
+            console.log('u', u);
+            console.log('wot', wot);
+        });
     };
 
     return {
-        isBo3Mode: TheBansModel.isBo3Mode,
         maps: maps,
         toggleBan: toggleBan,
         pickedMap: pickedMap,
         isTeamOnesTurn: isTeamOnesTurn,
         bansTeamOne: bansTeamOne,
-        bansTeamTwo: bansTeamTwo
+        bansTeamTwo: bansTeamTwo,
+        customTitle: customTitle,
+        bo3Steps: bo3Steps,
+        isBo3Mode: TheBansModel.isBo3Mode
     };
 };
 

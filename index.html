@@ -20,23 +20,33 @@
     <div class="main">
         <header>
             <div class="content">
-                <h1>CS:GO CHICAGO <span class="accent">MAP BANS</span></h1>
+                <h1><span data-bind="text: customTitle">CS:GO CHICAGO</span> <span class="accent">MAP BANS</span></h1>
 
                 <!-- PREFS PANEL -->
                 <div class="prefs">
                     <i class="icon icon-cog"></i>
                     <div class="prefs-pane">
                         <div class="content">
-                            <h3>Active maps</h3>
+                            <h3>Maps in pool</h3>
 
                             <ul class="nobull" data-bind="foreach: maps">
                                 <li>
-                                    <input type="checkbox" data-bind="checked: active" />
-                                    <span class="" data-bind="text: name">Mapname</span>
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: active" />
+                                        <span data-bind="text: name">Mapname</span>
+                                    </label>
                                 </li>
                             </ul>
 
                             <button class="btn btn-large btn-bo3" data-bind="click: function(){isBo3Mode(true)}, css:{ 'btn-bo3-enabled': isBo3Mode() }">Best of 3 Mode</button>
+
+                            <!-- <h3>Bo3 steps</h3>
+                            <ol data-bind="foreach: bo3Steps">
+                                <li>Team <span data-bind="text: parseInt($index()) + 1"></span>
+                                    <span data-bind="visible: isPickStep">picks</span>
+                                    <span data-bind="visible: isBanStep">bans</span>
+                                </li>
+                            </ol> -->
 
                         </div>
                     </div>
@@ -59,12 +69,18 @@
 
                     <div class="col-60">
                         <ul class="map-list" data-bind="foreach: maps">
+
+                            <!-- ko if: active() -->
+
                             <li class="map" data-bind="css:{ banned: isBanned(), picked: isPicked() }, click: $parent.toggleBan">
                                 <div data-bind="css: 'map-' + id">
                                     <div class="graphic"></div>
                                     <span class="map-label" data-bind="text: name">Mapname</span>
                                 </div>
                             </li>
+
+                            <!-- /ko -->
+
                         </ul>
                     </div>
 
