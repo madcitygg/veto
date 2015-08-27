@@ -58,17 +58,19 @@
 
                 <div class="cols">
                     <div class="col-20">
-                        <input class="team-header" type="text" placeholder="Team 1" />
-
-                        <ul class="bans-list" data-bind="foreach: bansTeamOne">
-                            <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
-                                Mapname
-                            </li>
-                        </ul>
+                        <div class="bans-panel">
+                            <input class="team-header" type="text" placeholder="Team 1" />
+                            
+                            <ul class="bans-list" data-bind="foreach: bansTeamOne">
+                                <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
+                                    Mapname
+                                </li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="col-60">
-                        <ul class="map-list" data-bind="foreach: maps">
+                        <ul class="map-list cf" data-bind="foreach: maps">
 
                             <!-- ko if: active() -->
 
@@ -85,13 +87,15 @@
                     </div>
 
                     <div class="col-20 col-last">
-                        <input class="team-header" type="text" placeholder="Team 2" />
+                        <div class="bans-panel">
+                            <input class="team-header" type="text" placeholder="Team 2" />
 
-                        <ul class="bans-list" data-bind="foreach: bansTeamTwo">
-                            <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
-                                Mapname
-                            </li>
-                        </ul>
+                            <ul class="bans-list" data-bind="foreach: bansTeamTwo">
+                                <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
+                                    Mapname
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div><!-- .cols -->
 

@@ -22,12 +22,12 @@ body {
 /* BASE FONT SIZE */
 body {
     background: none #333;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 /* BASE FONT FAMILY and COLOR -- FORM ELEMENTS CAN HAVE INHERITANCE ISSUES */
 body, button, input, select, textarea {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     color: #FFF;
 }
 
@@ -113,6 +113,15 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 
 }
 
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
 
 /*****************
     MEDIA BOXES
@@ -232,7 +241,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 .page { padding: 0 20px; }
 
 .main {
-    width: 1260px;
+    min-width: 768px;
+    max-width: 1880px;
     margin: 0 auto;
 }
 
@@ -254,7 +264,7 @@ header:hover .btn-bo3 {
 }
 
 .content {
-    padding: 15px;
+    padding: 10px;
 }
 
 /**************
@@ -276,7 +286,7 @@ header:hover .btn-bo3 {
 
 .prefs:hover .prefs-pane {
     display: block;
-    background: none rgba(0, 0, 0, .5);
+    background: none rgba(30, 30, 30, .9);
 }
 
 .icon {
@@ -297,19 +307,31 @@ header:hover .btn-bo3 {
     SITE CONTENT
 **************/
 .team-header {
+    display:  block;
+    width: 100%;
     -webkit-appearance: none;
-    font-size: 24px;
+    font-size: 22px;
     background: none transparent;
     border: 0;
+    border-bottom: 1px solid #999;
     margin-bottom: 8px;
+    padding-bottom: 5px;
+    color: #ddd;
+}
+
+::-webkit-input-placeholder { color: #ddd; }
+::-moz-placeholder { color: #ddd; }
+
+.bans-panel {
+    background: rgba(255, 255, 255, .05);
+    padding: 8px 10px;
+    min-height: 200px;
+    border-radius: 2px;
 }
 
 .bans-list {
     list-style: inside disc;
-    background: rgba(255, 255, 255, .05);
-    min-height: 100px;
-    padding: 8px 10px;
-    border-radius: 2px;
+    color: #ccc;
 }
 
 .bans-list > * {
@@ -323,13 +345,13 @@ header:hover .btn-bo3 {
 }
 
 .map-list {
-    font-size: 36px;
+    font-size: 30px;
     list-style: outside none;
 }
 
 .map {
     width: calc(50% - 10px);
-    height: 125px;
+    height: 150px;
     position: relative;
     padding: 20px;
     margin-bottom: 20px;
@@ -337,10 +359,12 @@ header:hover .btn-bo3 {
     cursor: pointer;
     float: left;
     text-shadow:
-        1px 1px 8px rgba(0, 0, 0, .9),
+        0 0 5px rgba(0, 0, 0, .9),
+        0 0 5px rgba(0, 0, 0, .9),
         1px 1px 8px rgba(0, 0, 0, .9);
     line-height: 1;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .75);
+    letter-spacing: 2px;
 }
 
 .map:nth-child(2n) {
@@ -353,9 +377,10 @@ header:hover .btn-bo3 {
     width: 100%;
     background-size: 100% auto;
     background-position: 10% 50%;
+    background-repeat: no-repeat;
     top: 0;
     left: 0;
-    -webkit-filter: brightness(80%);
+    -webkit-filter: brightness(100%);
     -webkit-transition: all 150ms ease;
 }
 
@@ -364,11 +389,11 @@ header:hover .btn-bo3 {
 }
 
 .map:hover .graphic {
-    -webkit-filter: brightness(100%);
+    -webkit-filter: brightness(130%) saturate(120%);
 }
 
 .map.banned .graphic {
-    -webkit-filter: brightness(20%);
+    -webkit-filter: brightness(30%);
 }
 
 .map.banned .map-label {
@@ -396,6 +421,8 @@ header:hover .btn-bo3 {
 .map-dust2 .graphic    { background-image: url(../img/dust2.png); }
 .map-season .graphic   { background-image: url(../img/season.jpg); }
 .map-inferno .graphic  { background-image: url(../img/inferno.jpg); }
+.map-cbble .graphic    { background-image: url(../img/cbble.png); }
+.map-train .graphic    { background-image: url(../img/train.png); }
 
 .callout {
     margin: 10px 0 0;

@@ -60,15 +60,15 @@ var BansModel = function () {
     };
 
     var maps = ko.observableArray([
+        map('cache', 'Cache', true),
+        map('cbble', 'Cobblestone', true),
+        map('dust2', 'Dust 2', true),
+        map('inferno', 'Inferno', true),
+        map('mirage', 'Mirage', true),
         map('nuke', 'Nuke', false),
         map('overpass', 'Overpass', true),
-        map('mirage', 'Mirage', true),
-        map('cache', 'Cache', true),
-        map('dust2', 'Dust 2', true),
         map('season', 'Season', false),
-        map('inferno', 'Inferno', true),
-        map('train', 'Train', true),
-        map('cbble', 'Cobblestone', true)
+        map('train', 'Train', true)
     ]);
 
     return {
