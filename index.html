@@ -4,18 +4,22 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width">
+
+    <meta name="description" content="A Chicago-based gaming event group leading expertly managed tournaments and other events.">
+    <meta name="keywords" content="mad city, madcity, mad city gg, madcitygg, lan, gaming, cs:go, csgo chicago, cs:go chicago, tournament, cash tournament, bootcamp, eric boyer, thane woidan">
+    <meta name="author" content="Mad City LLC">
+    <meta name="robots" content="index, follow">
+
+    <!-- GOOGLE VERIFY -->
+    <meta name="google-site-verification" content="Xr260D6zV70l9ECvNMKYqxsjjhQUlkIH0Gn7fKPpXe4" />
     
-    <title>CS:GO Chicago Map Bans</title>
+    <title>Mad City</title>
     
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>
-
-    <script src="js/Bans.js"></script>
 </head>
+
 <body>
     <div class="main">
         <header>
@@ -77,6 +81,11 @@
                             <li class="map" data-bind="css:{ banned: isBanned(), picked: isPicked() }, click: $parent.toggleBan">
                                 <div data-bind="css: 'map-' + id">
                                     <div class="graphic"></div>
+
+                                    <video class="footage" data-bind="attr:{ src: 'img/vid-' + id + '.mp4' }" autoplay loop>
+                                        Your browser doesn't allow videos, bro!
+                                    </video>
+
                                     <span class="map-label" data-bind="text: name">Mapname</span>
                                 </div>
                             </li>

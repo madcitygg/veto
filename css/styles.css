@@ -344,6 +344,10 @@ header:hover .btn-bo3 {
     text-decoration: none;
 }
 
+
+/**************
+    MAPS
+**************/
 .map-list {
     font-size: 30px;
     list-style: outside none;
@@ -353,7 +357,6 @@ header:hover .btn-bo3 {
     width: calc(50% - 10px);
     height: 150px;
     position: relative;
-    padding: 20px;
     margin-bottom: 20px;
     border: 2px solid rgba(255, 255, 255, .5);
     cursor: pointer;
@@ -362,13 +365,14 @@ header:hover .btn-bo3 {
         0 0 5px rgba(0, 0, 0, .9),
         0 0 5px rgba(0, 0, 0, .9),
         1px 1px 8px rgba(0, 0, 0, .9);
-    line-height: 1;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .75);
-    letter-spacing: 2px;
+
+    -webkit-transition: all 350ms ease;
+    transition: all 350ms ease;
 }
 
 .map:nth-child(2n) {
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 .map .graphic {
@@ -384,6 +388,20 @@ header:hover .btn-bo3 {
     -webkit-transition: all 150ms ease;
 }
 
+.map-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.map .footage {
+    display: none;
+    max-width: 100%;
+}
+
 .map:hover {
     border-color: rgba(255, 255, 255, .75);
 }
@@ -392,14 +410,26 @@ header:hover .btn-bo3 {
     -webkit-filter: brightness(130%) saturate(120%);
 }
 
+/**************
+    BANNED MAPS
+**************/
+.map.banned {
+    width: 0;
+    border: 0;
+}
+
 .map.banned .graphic {
-    -webkit-filter: brightness(30%);
+    /*-webkit-filter: brightness(30%);*/
 }
 
 .map.banned .map-label {
     color: #333;
+    opacity: 0;
 }
 
+/**************
+    PICKED MAPS
+**************/
 @-webkit-keyframes pulseSelected {
     from { box-shadow: 0 0 25px rgba(255, 50, 0, .98); }
     to   { box-shadow: 0 0 25px rgba(255, 50, 0, .5); }
@@ -407,11 +437,17 @@ header:hover .btn-bo3 {
 
 .map.picked {
     border-color: #FFCC00;
+    width: 100%;
+    height: auto;
     -webkit-animation: pulseSelected 500ms infinite alternate;
 }
 
-.map-label {
-    position: relative;
+.map.picked .graphic {
+    display: none;
+}
+
+.map.picked .footage {
+    display: block;
 }
 
 .map-nuke .graphic     { background-image: url(../img/nuke.png); }
