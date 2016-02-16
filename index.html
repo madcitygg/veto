@@ -15,16 +15,20 @@
     
     <title>Mad City</title>
     
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,800,800italic">
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.1.0.js"></script>
+    <script src="js/Bans.js"></script>
 </head>
 
 <body>
     <div class="main">
         <header>
-            <div class="content">
-                <h1><span data-bind="text: customTitle">CS:GO CHICAGO</span> <span class="accent">MAP BANS</span></h1>
+            <div class="container">
+                <h1><span data-bind="text: customTitle">Mad City</span> <span class="accent">map veto</span></h1>
 
                 <!-- PREFS PANEL -->
                 <div class="prefs">
@@ -58,23 +62,14 @@
             </div>
         </header>
         <div class="main-content">
-            <div class="content">
+            <div class="container">
 
-                <div class="cols">
-                    <div class="col-20">
-                        <div class="bans-panel">
-                            <input class="team-header" type="text" placeholder="Team 1" />
-                            
-                            <ul class="bans-list" data-bind="foreach: bansTeamOne">
-                                <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
-                                    Mapname
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="row">
 
-                    <div class="col-60">
-                        <ul class="map-list cf" data-bind="foreach: maps">
+
+
+                    <div class="col-sm-9">
+                        <ul class="map-list clearfix" data-bind="foreach: maps">
 
                             <!-- ko if: active() -->
 
@@ -82,9 +77,9 @@
                                 <div data-bind="css: 'map-' + id">
                                     <div class="graphic"></div>
 
-                                    <video class="footage" data-bind="attr:{ src: 'img/vid-' + id + '.mp4' }" autoplay loop>
+                                    <!-- <video class="footage" data-bind="attr:{ src: 'img/vid-' + id + '.mp4' }" autoplay loop>
                                         Your browser doesn't allow videos, bro!
-                                    </video>
+                                    </video> -->
 
                                     <span class="map-label" data-bind="text: name">Mapname</span>
                                 </div>
@@ -94,8 +89,18 @@
 
                         </ul>
                     </div>
+                    
+                    <div class="col-sm-3">
+                        <div class="bans-panel">
+                            <input class="team-header" type="text" placeholder="Team 1" />
+                            
+                            <ul class="bans-list" data-bind="foreach: bansTeamOne">
+                                <li class="ban" data-bind="text: name, css:{ 'pick': isPicked() }">
+                                    Mapname
+                                </li>
+                            </ul>
+                        </div>
 
-                    <div class="col-20 col-last">
                         <div class="bans-panel">
                             <input class="team-header" type="text" placeholder="Team 2" />
 
@@ -106,7 +111,13 @@
                             </ul>
                         </div>
                     </div>
-                </div><!-- .cols -->
+                    
+                </div><!-- .row -->
+
+                <div class="row">
+                    
+                </div>
+                
 
             </div>
         </div>

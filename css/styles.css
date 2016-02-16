@@ -8,6 +8,15 @@
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,article,aside,big,cite,code,del,details,dfn,em,figcaption,figure,footer,header,hgroup,img,ins,kbd,nav,q,samp,section,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline;}:focus{outline: 0;}img{-ms-interpolation-mode: bicubic;}body{line-height: 1;}table{border-spacing: 0;}caption,th,td{text-align: left; font-weight: normal;}blockquote:before,blockquote:after,q:before,q:after{content: "";}blockquote,q{quotes: "" "";}
 
 /**************
+    BRAND
+**************/
+/* Orange      = #D96D1B */
+/* Dark brown  = #300A0C */
+/* Deep orange = #9C3B1B */
+/* Pale yellow = #FEE279 */
+
+
+/**************
     BASICS
 **************/
 html,
@@ -21,14 +30,14 @@ body {
 
 /* BASE FONT SIZE */
 body {
-    background: none #333;
+    background: none #ffffff;
     font-size: 18px;
 }
 
 /* BASE FONT FAMILY and COLOR -- FORM ELEMENTS CAN HAVE INHERITANCE ISSUES */
 body, button, input, select, textarea {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    color: #FFF;
+    font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: #300A0C;
 }
 
 /* DEFAULT MARGIN FOR BLOCK LEVEL CONTENT ELEMENTS */
@@ -48,80 +57,12 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 
 * { box-sizing: border-box; }
 
-.muted { color: #CCC; }
-.accent { color: #EF4C37; }
+.muted { color: #666666; }
+.accent { color: #D96D1B; }
 
 .nobull { list-style: outside none; }
+.insidebull { list-style-position: inside; }
 
-/**************
-    COLUMNS
-**************/
-
-/* wrapping columns with .cols will clearfix */
-.cols:after {
-    content: " ";
-    display: table;
-}
-
-.cols:after {
-    clear: both;
-}
-
-/* intervals of 5% at a time, as well as 33% classes for thirds */
-.col-5,.col-10,.col-15,.col-20,.col-25,.col-30,.col-33,.col-35,.col-40,.col-45,
-.col-50,.col-55,.col-60,.col-65,.col-70,.col-75,.col-80,.col-85,.col-90,.col-95 {
-    margin: 0 2% 2% 0;
-    float: left;
-    display: inline;
-    min-height: 1px;
-}
-
-.col-5  { width: 3.1%;  }
-.col-10 { width: 8.2%;  }
-.col-15 { width: 13.3%; }
-.col-20 { width: 18.4%; }
-.col-25 { width: 23.5%; }
-.col-30 { width: 28.6%; }
-.col-35 { width: 33.7%; }
-.col-40 { width: 38.8%; }
-.col-45 { width: 43.9%; }
-.col-50 { width: 49%;   }
-.col-55 { width: 54.1%; }
-.col-60 { width: 59.2%; }
-.col-65 { width: 64.3%; }
-.col-70 { width: 69.4%; }
-.col-75 { width: 74.5%; }
-.col-80 { width: 79.6%; }
-.col-85 { width: 84.7%; }
-.col-90 { width: 89.8%; }
-.col-95 { width: 94.9%; }
-
-/* thirds, for use only with 3 of each other! */
-.col-33 { width: 32%; }
-
-/* last column in row needs this class */
-.col-last {
-    margin-right: 0;
-    display: inline-block;
-    float:none;
-    position: relative;
-    *display:block;
-    *width: auto;
-}
-
-.ie-lt7 .col-last {
-
-}
-
-.cf:before,
-.cf:after {
-    content: " ";
-    display: table;
-}
-
-.cf:after {
-    clear: both;
-}
 
 /*****************
     MEDIA BOXES
@@ -248,15 +189,18 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 
 header {
     position: relative;
+    padding: 10px 0;
 }
 
 header h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #300A0C;
+    word-spacing: -.2em;
+    letter-spacing: .05em;
     margin: 0;
-    color: #b3dcf1;
-    font-size: 50px;
-    display: inline-block;
-    vertical-align: middle;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, .5);
 }
 
 header:hover .btn-bo3 {
@@ -277,6 +221,7 @@ header:hover .btn-bo3 {
     width: 300px;
     z-index: 5;
     text-align: right;
+    color: #ffffff;
 }
 
 .prefs .prefs-pane {
@@ -316,15 +261,14 @@ header:hover .btn-bo3 {
     border-bottom: 1px solid #999;
     margin-bottom: 8px;
     padding-bottom: 5px;
-    color: #ddd;
+    color: #9C3B1B;
 }
 
-::-webkit-input-placeholder { color: #ddd; }
-::-moz-placeholder { color: #ddd; }
+::-webkit-input-placeholder { color: #9C3B1B; }
+::-moz-placeholder { color: #9C3B1B; }
 
 .bans-panel {
     background: rgba(255, 255, 255, .05);
-    padding: 8px 10px;
     min-height: 200px;
     border-radius: 2px;
 }
@@ -349,30 +293,31 @@ header:hover .btn-bo3 {
     MAPS
 **************/
 .map-list {
-    font-size: 30px;
+    font-size: 46px;
     list-style: outside none;
 }
 
 .map {
     width: calc(50% - 10px);
-    height: 150px;
+    height: 190px;
     position: relative;
     margin-bottom: 20px;
-    border: 2px solid rgba(255, 255, 255, .5);
+    border: 2px solid #D96D1B;
     cursor: pointer;
     float: left;
     text-shadow:
-        0 0 5px rgba(0, 0, 0, .9),
-        0 0 5px rgba(0, 0, 0, .9),
-        1px 1px 8px rgba(0, 0, 0, .9);
+        0 0 1px rgba(0, 0, 0, .98),
+        0 0 3px rgba(0, 0, 0, .98),
+        0 0 5px rgba(0, 0, 0, .98),
+        1px 1px 8px rgba(0, 0, 0, .98);
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .75);
 
-    -webkit-transition: all 350ms ease;
-    transition: all 350ms ease;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
 }
 
 .map:nth-child(2n) {
-    /*margin-left: 20px;*/
+    margin-left: 20px;
 }
 
 .map .graphic {
@@ -390,32 +335,44 @@ header:hover .btn-bo3 {
 
 .map-label {
     position: absolute;
-    top: 0;
+    top: 50px;
     left: 0;
+    width: 100%;
     padding: 20px;
     letter-spacing: 2px;
     line-height: 1;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    opacity: .85;
 }
 
-.map .footage {
+/*.map .footage {
     display: none;
     max-width: 100%;
-}
+}*/
 
 .map:hover {
-    border-color: rgba(255, 255, 255, .75);
+    border-color: #FEE279;
 }
 
 .map:hover .graphic {
     -webkit-filter: brightness(130%) saturate(120%);
 }
 
+.map:hover .map-label {
+    opacity: 1;
+}
+
 /**************
     BANNED MAPS
 **************/
 .map.banned {
-    width: 0;
-    border: 0;
+    /*width: 0;
+    border: 0;*/
+    border-color: #9C3B1B;
+    opacity: .25;
 }
 
 .map.banned .graphic {
@@ -423,32 +380,38 @@ header:hover .btn-bo3 {
 }
 
 .map.banned .map-label {
-    color: #333;
-    opacity: 0;
+    opacity: .5;
 }
 
 /**************
     PICKED MAPS
 **************/
 @-webkit-keyframes pulseSelected {
-    from { box-shadow: 0 0 25px rgba(255, 50, 0, .98); }
-    to   { box-shadow: 0 0 25px rgba(255, 50, 0, .5); }
+    from {
+        box-shadow:
+            0 0 25px rgba(217, 109, 27, .98),
+            0 0 25px rgba(217, 109, 27, .98);
+    }
+    to   {
+        box-shadow:
+            0 0 25px rgba(217, 109, 27, .5),
+            0 0 25px rgba(217, 109, 27, .5);
+    }
 }
 
 .map.picked {
-    border-color: #FFCC00;
-    width: 100%;
-    height: auto;
-    -webkit-animation: pulseSelected 500ms infinite alternate;
+    -webkit-filter: brightness(130%) saturate(120%);
+    border-color: #D96D1B;
+    -webkit-animation: pulseSelected 350ms infinite alternate;
 }
 
 .map.picked .graphic {
-    display: none;
+    /*height: 640px;*/
 }
 
-.map.picked .footage {
+/*.map.picked .footage {
     display: block;
-}
+}*/
 
 .map-nuke .graphic     { background-image: url(../img/nuke.png); }
 .map-overpass .graphic { background-image: url(../img/overpass.jpg); }

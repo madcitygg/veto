@@ -2,8 +2,8 @@
 // STORAGE FOR CHOSEN PREFS
 // STORAGE FOR CHOSEN PREFS
 var Storage = {
-    NAME_KEY:  'csgochi-veto-name',
-    MAPS_KEY: 'csgochi-veto-mappool',
+    NAME_KEY:  'madcity-veto-name',
+    MAPS_KEY: 'madcity-veto-mappool',
 
     storeName: function (name) {
         localStorage.setItem(this.MAPS_KEY, ko.toJSON(name));
@@ -60,15 +60,15 @@ var BansModel = function () {
     };
 
     var maps = ko.observableArray([
-        map('cache', 'Cache', true),
-        map('cbble', 'Cobblestone', true),
-        map('dust2', 'Dust 2', true),
-        map('inferno', 'Inferno', true),
-        map('mirage', 'Mirage', true),
-        map('nuke', 'Nuke', false),
-        map('overpass', 'Overpass', true),
-        map('season', 'Season', false),
-        map('train', 'Train', true)
+        map('cache', 'de_cache', true),
+        map('cbble', 'de_cbble', true),
+        map('dust2', 'de_dust2', true),
+        map('inferno', 'de_inferno', true),
+        map('mirage', 'de_mirage', true),
+        map('nuke', 'de_nuke', false),
+        map('overpass', 'de_overpass', true),
+        map('season', 'de_season', false),
+        map('train', 'de_train', true)
     ]);
 
     return {
@@ -100,7 +100,7 @@ var BansViewModel = function () {
 
 
     // recall and fill in saved name
-    var customTitle = 'CS:GO CHICAGO';
+    var customTitle = 'Mad City';
     var recalledTitle = Storage.recallName();
     if (recalledTitle) {
         customTitle = ko.observable(recalledTitle);
