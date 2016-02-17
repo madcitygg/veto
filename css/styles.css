@@ -64,6 +64,10 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 .insidebull { list-style-position: inside; }
 
 
+@media (min-width: 1620px) {
+    .container { width: 1600px; }
+}
+
 /*****************
     MEDIA BOXES
 ******************/
@@ -189,11 +193,11 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section {
 
 header {
     position: relative;
-    padding: 10px 0;
+    padding: 3px 0 15px;
 }
 
 header h1 {
-    font-size: 64px;
+    font-size: 30px;
     font-weight: 800;
     line-height: 1;
     text-transform: uppercase;
@@ -201,6 +205,20 @@ header h1 {
     word-spacing: -.2em;
     letter-spacing: .05em;
     margin: 0;
+}
+
+header .logo {
+    width: 200px;
+    height: 80px;
+    text-indent: -9999px;
+    font-size: 0;
+    display: inline-block;
+    overflow: hidden;
+    background: url(../img/mcgg-logo.png) 0 0 no-repeat;
+    background-size: 200px auto;
+    margin-right: 12px;
+    margin-top: 15px;
+    vertical-align: middle;
 }
 
 header:hover .btn-bo3 {
@@ -275,7 +293,7 @@ header:hover .btn-bo3 {
 
 .bans-list {
     list-style: inside disc;
-    color: #ccc;
+    color: #666666;
 }
 
 .bans-list > * {
@@ -295,6 +313,7 @@ header:hover .btn-bo3 {
 .map-list {
     font-size: 46px;
     list-style: outside none;
+    margin-bottom: 0;
 }
 
 .map {
