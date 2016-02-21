@@ -27,7 +27,7 @@ var Storage = {
 // MODEL FOR BANS
 // MODEL FOR BANS
 var BansModel = function () {
-    var isBo3Mode = ko.observable(false);
+    var isBo3Mode = ko.observable(true);
     var bo3StepModel = function (id, isPick, isBan) {
         return {
             id: id,
