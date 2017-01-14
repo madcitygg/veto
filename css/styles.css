@@ -458,7 +458,28 @@ header:hover .btn-bo3 {
     background-color: #BADA55;
 }
 
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, .75);
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 350px;
+    color: #000;
+    pointer-events: none;
+    opacity: 0;
 
+    -webkit-transition: opacity 500ms ease-in-out;
+    transition: opacity 500ms ease-in-out;
+}
+
+.overlay.visible {
+    opacity: 1;
+}
 
 
 

@@ -37,10 +37,10 @@ var BansModel = function () {
     };
 
     var bo3Steps = [
-        bo3StepModel(0, true, false),
-        bo3StepModel(1, true, false),
-        bo3StepModel(2, false, true),
-        bo3StepModel(3, false, true),
+        bo3StepModel(0, false, true),
+        bo3StepModel(1, false, true),
+        bo3StepModel(2, true, false),
+        bo3StepModel(3, true, false),
         bo3StepModel(4, false, true),
         bo3StepModel(5, false, true),
         bo3StepModel(6, false, true)
@@ -63,12 +63,12 @@ var BansModel = function () {
         map('cache', 'de_cache', true),
         map('cbble', 'de_cbble', true),
         map('dust2', 'de_dust2', true),
-        map('inferno', 'de_inferno', true),
         map('mirage', 'de_mirage', true),
-        map('nuke', 'de_nuke', false),
+        map('nuke', 'de_nuke', true),
         map('overpass', 'de_overpass', true),
-        map('season', 'de_season', false),
         map('train', 'de_train', true)
+        // map('season', 'de_season', false),
+        // map('inferno', 'de_inferno', false)
     ]);
 
     return {
@@ -98,6 +98,8 @@ var BansViewModel = function () {
     var bansTeamOne = ko.observableArray([]);
     var bansTeamTwo = ko.observableArray([]);
 
+    var isRandomizing = ko.observable(false);
+
 
     // recall and fill in saved name
     var customTitle = 'Mad City';
@@ -115,32 +117,75 @@ var BansViewModel = function () {
         }
     }
 
+    var generateSeed = function () {
+        var min = 0;
+        var max = 2;
+
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+
     var markLastPickedMap = function () {
-        var i = j = maps().length;
-        var unbannedMapIds = [];
+        var i = j = k = l = maps().length;
+        var availableMapIds = [];
         var lastMap = null;
+        var seed = generateSeed();
+        var tossedMapIds = [];
+        var tossTemp;
+        var lastMapIndex;
+        var randoCallback;
+
+        var delay = function (cb) {
+            isRandomizing(true);
+            var wut = setTimeout(cb, 1500);
+        }
 
         while (i--) {
-            if (maps()[i].isBanned() === false && maps()[i].active()) {
-                unbannedMapIds.push(maps()[i].id);
+            if (maps()[i].isBanned() === false && maps()[i].isPicked() === false && maps()[i].active()) {
+                availableMapIds.push(maps()[i].id);
             }
         }
 
-        if (isBo3Mode() && unbannedMapIds.length === 3) {
+        if (isBo3Mode() && availableMapIds.length === 3) {
             // picking for Bo3
-            var k = unbannedMapIds.length;
-            while (k--) {
-                if (findMapById(unbannedMapIds[k]).isPicked() === false) {
-                    lastMap = findMapById(unbannedMapIds[k]);
+            l = availableMapIds.length;
+
+            lastMap = findMapById(availableMapIds[seed]);
+            lastMapIndex = availableMapIds.indexOf(lastMap);
+
+            randoCallback = function () {
+                while (l--) {
+                    if (findMapById(availableMapIds[l]).isPicked() === false) {
+                        findMapById(availableMapIds[l]).isBanned(true);
+                    }
                 }
+
+                // pick the random map
+                lastMap.isBanned(false);
+                lastMap.isPicked(true);
+
+                isRandomizing(false);
             }
 
-            lastMap.isPicked(true);
+            delay(randoCallback);
 
-        } else if (isBo3Mode() === false && unbannedMapIds.length === 1) {
+        } else if (isBo3Mode() === false && availableMapIds.length === 3) {
             // picking for non-Bo3
-            lastMap = findMapById(unbannedMapIds[0]);
-            lastMap.isPicked(true);
+            lastMap = findMapById(availableMapIds[seed]);
+
+            randoCallback = function () {
+                // set all as banned
+                while (k--) {
+                    maps()[k].isBanned(true);
+                }
+
+                // pick the random map
+                lastMap.isBanned(false);
+                lastMap.isPicked(true);
+
+                isRandomizing(false);
+            }
+
+            delay(randoCallback);
         } else if (isBo3Mode() === false) {
             // was a regular ban, clear any picks
             while (j--) {
@@ -212,11 +257,6 @@ var BansViewModel = function () {
 
         // mark the map that was picked
         markLastPickedMap();
-
-        maps.subscribe(function (u, wot) {
-            console.log('u', u);
-            console.log('wot', wot);
-        });
     };
 
     return {
@@ -228,7 +268,8 @@ var BansViewModel = function () {
         bansTeamTwo: bansTeamTwo,
         customTitle: customTitle,
         bo3Steps: bo3Steps,
-        isBo3Mode: TheBansModel.isBo3Mode
+        isBo3Mode: TheBansModel.isBo3Mode,
+        isRandomizing: isRandomizing
     };
 };
 
